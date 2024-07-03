@@ -1,0 +1,10 @@
+{
+  "header": {
+    "movies": "Movies",
+    "tvShows": "TV Shows",
+    "animation": "Animation",
+    "mistery": "Mistery",
+    "more": "More",
+    "searchMovies": "Search Movies"
+  }
+}

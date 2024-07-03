@@ -1,0 +1,10 @@
+{
+  "header": {
+    "movies": "Filmovi",
+    "tvShows": "Serije",
+    "animation": "Animacija",
+    "mistery": "Misterija",
+    "more": "Više",
+    "searchMovies": "Pretraži filmove"
+  }
+}
