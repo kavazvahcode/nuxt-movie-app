@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxtjs/i18n',
     '@vesp/nuxt-fontawesome',
+    '@pinia/nuxt',
   ],
   postcss: {
     plugins: {
@@ -35,8 +36,8 @@ export default defineNuxtConfig({
   },
   fontawesome: {
     icons: {
-      solid: ['dollar-sign', 'heart'],
-      regular: ['user', 'message'],
+      solid: ['dollar-sign', 'heart', 'bell', 'angle-down'],
+      regular: ['user', 'message', 'bell'],
     },
   },
 })
