@@ -1,4 +1,4 @@
-import { globalHeaders } from './headers'
+import { globalHeaders } from '@/server/api/headers'
 
 const config = useRuntimeConfig()
 
@@ -12,7 +12,4 @@ const fetchApi = (endpoint: string, query: string | null) => {
   })
 }
 
-export default defineEventHandler(async () => {
-  const movies = await fetchApi('trending/movie/day?language=en-US', null)
-  return movies
-})
+export default fetchApi

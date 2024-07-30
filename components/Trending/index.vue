@@ -1,6 +1,8 @@
 <template>
-  <div class="rounded-2xl w-[1200px] h-[700px] relative">
+  <div class="rounded-2xl w-full h-[700px] relative">
+    <Loader v-if="!movies || movies.length === 0" />
     <swiper
+      v-else
       ref="swiperRef"
       :slides-per-view="1"
       @swiper="onSwiper"
@@ -35,7 +37,7 @@
                     alt="trending"
                     class="object-cover w-6 h-6"
                   />
-                  <p>Now trending</p>
+                  <p>{{ t('trending.trending') }}</p>
                 </div>
               </div>
               <div class="flex flex-col gap-4">
@@ -49,9 +51,19 @@
                   </div>
                 </div>
                 <p class="text-5xl w-[50%] font-semibold">{{ movie.title }}</p>
-                <p class="text-xl w-[50%] text-gray-300">
+                <p class="text-xl w-[60%] text-gray-300">
                   {{ movie.description }}
                 </p>
+                <div class="flex gap-6">
+                  <div class="flex items-center justify-start gap-2">
+                    <p class="text-2xl font-semibold">Release:</p>
+                    <p>{{ getReleaseDate(movie.release) }}</p>
+                  </div>
+                  <div class="flex items-center justify-start gap-2">
+                    <NuxtImg src="/icons/star.png" alt="star" class="w-6 h-6" />
+                    <p>{{ movie.rating }}</p>
+                  </div>
+                </div>
                 <div class="flex justify-between items-end">
                   <div class="flex gap-4">
                     <div class="pt-6">
@@ -63,7 +75,7 @@
                           alt="trending"
                           class="object-cover w-6 h-6"
                         />
-                        Watch
+                        {{ t('trending.watch') }}
                       </button>
                     </div>
                     <div class="pt-6">
@@ -75,7 +87,7 @@
                           alt="trending"
                           class="object-cover w-6 h-6"
                         />
-                        Download
+                        {{ t('trending.download') }}
                       </button>
                     </div>
                   </div>
@@ -107,28 +119,13 @@
           </div>
         </div>
       </swiper-slide>
-      <!-- <div class="swiper-button-prev" @click="swiperPrevSlide">
-        <NuxtImg
-          src="/icons/back.png"
-          alt="next-movie"
-          class="object-cover w-6 h-6"
-        />
-      </div>
-      <div class="swiper-button-next" @click="swiperNextSlide">
-        <NuxtImg
-          src="/icons/next.png"
-          alt="next-movie"
-          class="object-cover w-6 h-6"
-        />
-      </div> -->
     </swiper>
   </div>
 </template>
 
 <script setup>
-import { Navigation, Pagination, Scrollbar } from 'swiper/modules'
-
 // Import Swiper Vue.js components
+import { Navigation, Pagination, Scrollbar } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 
 // Import Swiper styles
@@ -136,6 +133,11 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
+
+import Loader from '@/components/Loader/index.vue'
+
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 defineProps({
   movies: {
@@ -146,6 +148,11 @@ defineProps({
 
 const getImageUrl = (path) => {
   return `https://image.tmdb.org/t/p/original${path}`
+}
+
+const getReleaseDate = (date) => {
+  const releaseDate = new Date(date)
+  return releaseDate.toDateString()
 }
 
 const swiperInstance = ref()

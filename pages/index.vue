@@ -1,16 +1,34 @@
 <template>
-  <div>
-    <Trending :movies="trendingMovies" />
-  </div>
+  <HomepageLayout>
+    <div class="grid grid-cols-12 gap-6">
+      <div class="col-span-3 flex flex-col gap-8">
+        <Search />
+        <Popular :popular="popularMoviesData" />
+      </div>
+      <div class="col-span-9 flex flex-col gap-8">
+        <Header />
+        <Trending :movies="trendingMoviesData" />
+      </div>
+    </div>
+  </HomepageLayout>
 </template>
 
 <script setup>
 import Header from '@/components/Header'
 import Trending from '@/components/Trending'
+import HomepageLayout from '@/layouts/HomepageLayout.vue'
+import Search from '@/components/Search'
+import Popular from '@/components/Popular'
 import { genres } from '../utils/data.js'
-const { data } = await useFetch('/api/movies/search')
-console.log('Movie data:', data.value.results)
-console.log('GENRES: ', genres)
+
+definePageMeta({
+  layout: 'HomepageLayout',
+})
+
+const trendingMovies = await useFetch('/api/movies/trending')
+const popularMovies = await useFetch('/api/movies/popular')
+
+console.log('Popular movies: ', popularMovies.data)
 
 const getGenreNames = (genreIds) => {
   return genreIds
@@ -21,8 +39,7 @@ const getGenreNames = (genreIds) => {
     .filter((name) => name !== null)
 }
 
-// Transoform received data like this:
-const trendingMovies = data.value.results.map((movie) => ({
+const trendingMoviesData = trendingMovies.data.value.results.map((movie) => ({
   id: movie.id,
   title: movie.title,
   poster: movie.poster_path,
@@ -33,7 +50,42 @@ const trendingMovies = data.value.results.map((movie) => ({
   genres: getGenreNames(movie.genre_ids),
 }))
 
-console.log('Transformed movie data:', trendingMovies)
-
-// console.log(data)
+const popularMoviesData = popularMovies.data.value.results.map((movie) => ({
+  id: movie.id,
+  title: movie.title,
+  poster: movie.poster_path,
+  backdrop: movie.backdrop_path,
+  description: movie.overview,
+  rating: movie.vote_average,
+  release: movie.release_date,
+  genres: getGenreNames(movie.genre_ids),
+}))
 </script>
+
+<style>
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #ccc;
+  visibility: hidden;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  visibility: visible;
+}
+</style>
