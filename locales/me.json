@@ -6,5 +6,10 @@
     "mistery": "Misterija",
     "more": "Više",
     "searchMovies": "Pretraži filmove"
+  },
+  "trending": {
+    "trending": "U trendu",
+    "watch": "Gledaj",
+    "download": "Preuzmi"
   }
 }

@@ -78,7 +78,6 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-// import { getTrendingMovies } from '@/server/api/movies/search'
 const { t } = useI18n()
 
 const current = ref('')

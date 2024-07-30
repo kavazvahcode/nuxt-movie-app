@@ -6,5 +6,10 @@
     "mistery": "Mistery",
     "more": "More",
     "searchMovies": "Search Movies"
+  },
+  "trending": {
+    "trending": "Now trending",
+    "watch": "Watch",
+    "download": "Download"
   }
 }
