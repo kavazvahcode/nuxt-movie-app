@@ -1,5 +1,5 @@
 <template>
-  <div class="relative rounded-xl h-[full]">
+  <div class="relative rounded-xl h-full">
     <NuxtImg
       :src="getImageUrl(item.backdrop)"
       class="object-cover w-full h-52 rounded-xl"

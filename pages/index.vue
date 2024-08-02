@@ -8,6 +8,7 @@
       <div class="col-span-9 flex flex-col gap-8">
         <Header />
         <Trending :movies="trendingMoviesData" />
+        <TopRated :topRated="topRatedData" />
       </div>
     </div>
   </HomepageLayout>
@@ -19,6 +20,7 @@ import Trending from '@/components/Trending'
 import HomepageLayout from '@/layouts/HomepageLayout.vue'
 import Search from '@/components/Search'
 import Popular from '@/components/Popular'
+import TopRated from '@/components/TopRated'
 import { genres } from '../utils/data.js'
 
 definePageMeta({
@@ -27,8 +29,10 @@ definePageMeta({
 
 const trendingMovies = await useFetch('/api/movies/trending')
 const popularMovies = await useFetch('/api/movies/popular')
+const topRated = await useFetch('/api/movies/top-rated')
 
 console.log('Popular movies: ', popularMovies.data)
+console.log('top rated: ', topRated.data)
 
 const getGenreNames = (genreIds) => {
   return genreIds
@@ -59,6 +63,17 @@ const popularMoviesData = popularMovies.data.value.results.map((movie) => ({
   rating: movie.vote_average,
   release: movie.release_date,
   genres: getGenreNames(movie.genre_ids),
+}))
+
+const topRatedData = topRated.data.value.results.map((movie) => ({
+  id: movie.id,
+  title: movie.title,
+  poster: movie.poster_path,
+  backdrop: movie.backdrop_path,
+  description: movie.overview,
+  rating: movie.vote_average,
+  release: movie.release_date,
+  genres: getGenreNames(movie.genre_ids)[0],
 }))
 </script>
 
