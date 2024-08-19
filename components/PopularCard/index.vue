@@ -7,9 +7,22 @@
     />
     <div>
       <div
-        class="absolute bottom-0 left-0 w-full p-4 bg-opacity-50 bg-gray-500/50 backdrop-blur-sm text-white rounded-b-xl"
+        class="absolute bottom-0 left-0 w-full p-4 bg-opacity-50 bg-gray-500/50 backdrop-blur-sm text-white rounded-b-xl flex justify-between items-center"
       >
-        <p class="font-semibold text-lg">{{ item.title }}</p>
+        <p class="w-full font-semibold text-lg">{{ item.title }}</p>
+        <div class="justify-end items-end flex">
+          <NuxtLink :to="`/movie/${item.id}`">
+            <div
+              class="rounded-full w-10 h-10 backdrop-blur-sm bg-white/50 flex justify-center items-center"
+            >
+              <NuxtImg
+                src="/icons/play-white.png"
+                alt="play"
+                class="object-cover w-4 h-4"
+              />
+            </div>
+          </NuxtLink>
+        </div>
       </div>
     </div>
   </div>
