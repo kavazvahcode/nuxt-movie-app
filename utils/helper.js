@@ -9,4 +9,13 @@ const getGenreNames = (genreIds) => {
     .filter((name) => name !== null)
 }
 
-export { getGenreNames }
+const getImageUrl = (path) => {
+  return `https://image.tmdb.org/t/p/original${path}`
+}
+
+const getReleaseDate = (date) => {
+  const releaseDate = new Date(date)
+  return releaseDate.toDateString()
+}
+
+export { getGenreNames, getImageUrl, getReleaseDate }
