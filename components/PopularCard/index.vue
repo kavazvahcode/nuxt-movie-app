@@ -11,7 +11,7 @@
       >
         <p class="w-full font-semibold text-lg">{{ item.title }}</p>
         <div class="justify-end items-end flex">
-          <NuxtLink :to="`/movie/${item.id}`">
+          <NuxtLink :to="`/watch/${item.id}`">
             <div
               class="rounded-full w-10 h-10 backdrop-blur-sm bg-white/50 flex justify-center items-center"
             >

@@ -67,28 +67,32 @@
                 <div class="flex justify-between items-end">
                   <div class="flex gap-4">
                     <div class="pt-6">
-                      <button
-                        class="rounded-[30px] px-6 py-4 bg-white text-black text-xl flex gap-4 items-center"
-                      >
-                        <NuxtImg
-                          src="/icons/play.png"
-                          alt="trending"
-                          class="object-cover w-6 h-6"
-                        />
-                        {{ t('trending.watch') }}
-                      </button>
+                      <NuxtLink :to="`watch/${movie.id}`">
+                        <button
+                          class="rounded-[30px] px-6 py-4 bg-white text-black text-xl flex gap-4 items-center"
+                        >
+                          <NuxtImg
+                            src="/icons/play.png"
+                            alt="trending"
+                            class="object-cover w-6 h-6"
+                          />
+                          {{ t('trending.watch') }}
+                        </button>
+                      </NuxtLink>
                     </div>
                     <div class="pt-6">
-                      <button
-                        class="rounded-[30px] px-6 py-4 bg-transparent text-white text-xl flex gap-4 items-center border border-white"
-                      >
-                        <NuxtImg
+                      <NuxtLink :to="`movie/${movie.id}`">
+                        <button
+                          class="rounded-[30px] px-6 py-4 bg-transparent text-white text-xl flex gap-4 items-center border border-white"
+                        >
+                          <!-- <NuxtImg
                           src="/icons/downloads.png"
                           alt="trending"
                           class="object-cover w-6 h-6"
-                        />
-                        {{ t('trending.download') }}
-                      </button>
+                        /> -->
+                          {{ t('trending.seeMore') }}
+                        </button>
+                      </NuxtLink>
                     </div>
                   </div>
                   <div class="flex gap-4 relative">
@@ -154,6 +158,14 @@ const getReleaseDate = (date) => {
   const releaseDate = new Date(date)
   return releaseDate.toDateString()
 }
+
+// const streamingServices = computed(() => {
+//   const services = {};
+//   movies.forEach((movie) => {
+//     services[movie.id] = fetchStreamingServices(movie.imdb_id);
+//   });
+//   return services;
+// });
 
 const swiperInstance = ref()
 
